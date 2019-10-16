@@ -1,0 +1,883 @@
+#include<iostream>
+#include<string> //arjinder.20858@lpu.co.in
+#include<math.h>
+#include<fstream>
+#include<conio.h>
+#include<stdlib.h>
+using namespace std;
+int main();
+int security();
+void admdis();
+void admstockview();
+void update();
+void write();
+void del();
+void PC();
+void Laptop();
+void repair();
+void billdis();
+void cuscall();
+class order;
+class customer;
+int ucount;
+class pc
+{	public:
+	int pid;
+	char pname[30];
+	int qty;
+	int price;
+	void entry()
+	{
+		cout<<"Enter the product id:\n";
+		cin>>pid;
+		cin.ignore();
+		cout<<"\nEnter the product name:\n";
+		cin.getline(pname,30);
+		cout<<"\nEnter the price of the product:\n";
+		cin>>price;
+		cout<<"\nEnter the quantity:\n";
+		cin>>qty;
+	}
+	void upentry()
+	{
+		cout<<"Enter the updated price:	\n";
+		cin>>price;
+		cout<<"Enter the updated quantity: \n";
+		cin>>qty;
+	}
+	void display()
+	{
+		cout<<pid<<"                        "<<pname<<"                         "<<"Rs"<<price<<"                          "<<qty<<"\n";
+	}
+};
+class order
+{
+	int choice, choice2;
+	char choice3, ck, cz;
+	public:
+		void ordermain(){
+			level1:
+	cout<<"----------------------------------------------------Welcome to Order menu---------------------------------------------------";
+	cout<<"\nPlease complete your order through this portal!\n";
+	cout<<"***************************************************\n";
+	cout<<"\n\n				1.Buy new computer/Laptop\n";
+	cout<<"				2.Repair computer/Laptop\n";
+	cout<<"				3.Go back to previous menu\n";
+	cout<<"Enter your choice: ";
+	cin>>choice;
+	if (choice==1)
+	{	ordermenu:
+		system("CLS");
+		cout<<"----------------------------------------------------Welcome to Order menu---------------------------------------------------";
+		cout<<"\nPlease complete your order through this portal!\n";
+		cout<<"***************************************************\n";
+		cout<<"\n\n				1.Place order for PC\n";
+		cout<<"				2.Place order for Laptop\n";
+		level2:
+		cout<<"Enter your choice: \n";
+		cin>>choice2;
+		if(choice2==1)
+		{
+			system("CLS");
+			PC();
+		}
+		else if(choice2==2)
+		{
+			system("CLS");
+			Laptop();
+			cout<<"Press B to go back\n";
+			ret5:
+			cin>>cz;
+			if(cz=='B')
+			{
+				system("CLS");
+				goto ordermenu;
+			}
+			else
+			{
+				cout<<"Wrong input, try again!\n";
+				goto ret5;
+			}
+		}
+		
+		else
+		{
+			cout<<"Invalid Input\n";
+			level3:
+			cout<<"Press 'B'to return to the previous menu and 'R' to retry.\n";
+			cin>>choice3;
+			if(choice3=='B')
+			{
+				system("CLS");
+				goto level1;
+			}
+			else if(choice3=='R')
+			{
+				system("CLS");
+				goto level2;
+			}
+			else
+			{
+				cout<<"Wrong input! Try again.\n";
+				goto level3;
+			}
+		}
+	}
+	if(choice==2)
+	{
+		system("CLS");
+		repair();
+		cout<<"Press 'B' to go back\n";
+		cin>>ck;
+		if(ck=='B')
+		{
+			system("CLS");
+			goto level1;
+		}
+	}
+	else if(choice==3)
+	{
+		system("CLS");
+		cuscall();
+		
+	}
+}
+};
+class administrator
+{
+	int q, c;
+	char ch1, ch2, cl;
+	public:
+	void adm()
+{	admwin:
+	cout<<"---------------------------------------------------------------------WELCOME TO THE ADMINISTRATIVE MENU!---------------------------------------------------------------------";
+	cout<<"\nYou now have administrative access\n";
+	cout<<"**************************************\n";
+	cout<<"\n\n\nChoose your actions from the list below:-\n\n";
+	cout<<"				1.List of Customer/their passwords\n\n";
+	cout<<"				2.Available Stock\n\n";
+	cout<<"				3.Update Stock\n\n";
+	cout<<"				4.Log out\n";
+	cout<<"_______________________________________________________________\n";
+	cout<<"Enter your choice: ";
+	cin>>q;
+	if(q==4)
+	{
+		system("CLS");
+		main();
+	}
+	else if(q==1)
+	{
+		system("CLS");
+		cout<<"*************************************************************The Details of all active users!**********************************************************************\n";
+		admdis();
+		ret:
+		cout<<"Press 'B' to get back to the previous menu:";
+		cin>>ch1;
+		if(ch1=='B')
+		{
+			system("CLS");
+			goto admwin;
+		}
+		else
+		{
+			cout<<"\nInvalid input, please try again!\n";
+			goto  ret;
+		}
+	}
+	else if(q==2)
+	{	
+		system("CLS");
+		cout<<"################################################################ INVENTORY! ##########################################################################\n\n";
+		admstockview();
+		retry:
+		cout<<"\nPress 'B' to go back to previous menu\n";
+		cin>>ch1;
+		if(ch1=='B')
+		{
+			system("CLS");
+			goto admwin;
+		}
+		else
+		{
+			cout<<"\nInvalid input, Please try again:\n";
+			goto retry;
+		}
+	}
+	else if(q==3)
+	{
+		system("CLS");
+		marker1:
+		cout<<"---------------------------------------------------------------Welcome to the Update portal!------------------------------------------------------------\n\n";
+		cout<<"				1.Update existing stock\n";
+		cout<<"				2.Add new Item in the stock\n";
+		cout<<"				3.Delete any Item";
+		cout<<"				4.Go back to previous menu\n";
+		ret3:
+		cin>>c;
+		if(c==1)
+		{
+			system("CLS");
+			update();
+			marker2:
+			cout<<"Press 'B' to go back";
+			cin>>ch2;
+			if(ch2=='B')
+			{
+				system("CLS");
+				goto marker1;
+			}
+			else
+			{
+				cout<<"Wrong input, try again: \n";
+				goto marker2;
+			}
+		}
+		else if(c==2)
+		{
+			system("CLS");
+			write();
+			marker3:
+			cout<<"Press 'B' to go back\n";
+			cin>>ch2;
+			if(ch2=='B')
+			{
+				system("CLS");
+				goto marker1;
+			}
+			else
+			{
+				cout<<"Wrong input, try again: \n";
+				goto marker3;
+			}
+		}
+		else if(c==3)
+		{
+			system("CLS");
+			cout<<"----------------------------------------------------------------------------------WELCOME TO THE DELETION PORTAL------------------------------------------------------------------\n\n";
+			cout<<"Please follow the Instructions provided very carefully!\n\n";
+			del();
+			ret2:
+			cout<<"Press 'B' to go back to previous menu!\n";
+			cin>>cl;
+			if(cl=='B')
+			{
+				system("CLS");
+				goto admwin;
+			}
+			else
+			{
+				cout<<"Invalid input, please try again\n";
+				goto ret2;
+			}
+		}
+		else if(c==4)
+		{
+			system("CLS");
+			goto admwin;
+		}
+		else
+		{
+			cout<<"Wrong input please try again!\n";
+			goto ret3;
+		}
+	}
+}
+};
+class customer
+{
+	int w;
+		int pwd, pwd1;
+	string username;
+	int count=0, count1=0, offset;
+	string str;
+	string check;
+	char a,b,c,d, cb;
+	public:
+		void cus()
+		{
+			order ob1;
+			cout<<"---------------------------------------------------------------WELCOME TO THE CUSTOMER'S MENU!----------------------------------------------------------";
+			cout<<"\n********************************************************\n";
+			cout<<"* Hello dear customer! You are successfully logged in!"<<" *\n";
+			cout<<"********************************************************\n";
+			cout<<"\n\n\nPlease choose your actions, as per given below:-\n\n";
+			cout<<"				1.Place a new order\n\n";
+			cout<<"				2.Billing details\n\n";
+			cout<<"				3.Log out\n";
+			cout<<"_____________________________________________________________\n";
+			cout<<"Enter your choice: ";
+			cin>>w;
+			if(w==3)
+			{
+				system("CLS");
+				main();
+			}
+		else if(w==1)
+			{
+				system("CLS");
+				ob1.ordermain();
+			}
+		else if(w==2)
+		{
+			system("CLS");
+			billdis();
+			ret7:
+			cout<<"Press 'B' to go back\n";
+			cin>>cb;
+			if(cb=='B')
+			{
+				system("CLS");
+				cus();
+			}
+			else
+			{
+				cout<<"Invalid input, try again\n";
+				goto ret7;
+			}
+		}
+		}
+	void login()
+	{
+		int count=0, count1=0, offset, count2=0;
+	string str, pwd3;
+	string check, check2;
+	label6:
+	cout<<"--------------------------------------------------------------------Customer LOG-IN---------------------------------------------------\n";
+	cout<<"Please complete your log-in in order to proceed further!\n";
+	cout<<"*********************************************************\n"; 
+	cout<<"\nEnter username: ";
+	cin>>str;
+	ifstream f3;
+f3.open("Users.txt");
+	while(getline(f3,check))
+	{
+	
+		count++;
+		if((offset= check.find(str,0)) != string::npos)
+		{ 
+		count1++;
+		break;
+	}
+	}
+	f3.close();
+	if(count1==0)
+	{	
+		cout<<"User dosen't exist";
+		cout<<"\n________________________________\n";
+	label7:
+		cout<<"Press 'M' for main menu, or 'R' to retry!\n";
+		cin>>d;
+		if(d=='M')
+		{
+			system("CLS");
+			main();
+		}
+		else if(d=='R')
+		{
+			system("CLS");
+			goto label6;
+		}
+		else
+		{
+			cout<<"\nInvalid input, try again\n";
+			goto label7;
+		}
+	}
+	else
+	{
+		cout<<"\nUser found! ";
+		ucount=count;
+		cout<<"\nEnter your pin: ";
+		cin>>pwd3;
+		ifstream f4;
+		f4.open("Users.txt");
+		while(getline(f4,check2))
+	{
+		count2++;
+		if(count2==count+1)
+		{
+		if((offset= check2.find(pwd3,0)) != string::npos)
+		{ 
+		system("CLS");
+		cus();
+	}
+	else
+	cout<<"\nWrong Password! (Log-in failed!)\n";
+	label8:
+		cout<<"Press 'M' for main menu, or 'R' to retry!\n";
+		cin>>d;
+		if(d=='M')
+		{
+			system("CLS");
+			main();
+		}
+		else if(d=='R')
+		{
+			system("CLS");
+			goto label6;
+		}
+		else
+		{
+			cout<<"\nInvalid input, try again\n";
+			goto label8;
+		}
+	}
+	}
+	f4.close();
+	}
+	}
+		void signup()
+		{
+			label2:
+	cout<<"--------------------------------------------------------------------------------SIGN-UP MENU------------------------------------------------------";
+	cout<<"\nPlease fill the details asked carefully!\n";
+	cout<<"***********************************************\n\n";
+	cout<<"Enter the username: ";
+	cin>>username;
+	str=username;
+		ifstream f1;
+		f1.open("Users.txt");
+	while(getline(f1,check))
+	{
+	
+		count++;
+		if((offset= check.find(str,0)) != string::npos)
+		{ 
+		count1++;
+		break;
+	}
+	}
+	f1.close();
+	if(count1==0)
+	{	
+	label4:
+	cout<<"\nEnter your pin (It should be a numerical value): ";
+	cin>>pwd;
+	cout<<"\nRe-enter your pin: ";
+	cin>>pwd1;
+	if(pwd==pwd1)
+	{
+		ofstream f2;
+		f2.open("Users.txt",ios::app);
+		f2<<username<<"\n";
+		f2<<pwd<<"\n";
+		f2.close();
+		cout<<"Account added\n";
+		label5:
+		cout<<"Press 'M' to return to main menu\n";
+		cin>>c;
+		 if(c=='M')
+		{
+			system("CLS");
+			main();
+		}
+		else
+		{
+		cout<<"Wrong input, try again:\n";
+		goto label5;
+	}
+		
+	}
+	else
+	{
+		cout<<"Password is wrong\n";
+		cout<<"Please try again by pressing any key, or press 'M' for main menu!\n";
+		cin>>b;
+		if(b=='M')
+		{
+			main();
+		}
+		else
+		goto label4;
+	}
+}
+	else
+	{
+		cout<<"\n-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*\n";
+		cout<<"This user already exists!\nTry log in or use a different name\n";
+		cout<<"-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*\n";
+	label3:
+		cout<<"Press 'M' for main menu or 'R' to retry sign-up\n";
+		cin>>a;
+		if(a=='M')
+		{	
+			system("CLS");
+			main();
+	}
+		else if(a=='R');
+		{	
+		system("CLS");
+		goto label2;
+	}
+		if(a!='M'|| a!='R')
+		{
+			cout<<"Wrong input, please try again: \n";
+			goto label3;
+		}
+	}
+		}
+};
+int security()
+{	int x;
+	cout<<"---------------------------------------------------------------------LOGIN PAGE!-------------------------------------------------------------------";
+	cout<<"\nPlease select any option as per your requirement\n";
+	cout<<"****************************************************\n";
+	cout<<"\n\n\n				1.Login (if you already have an account)\n\n";
+	cout<<"				2.Sign-up (if it's your first time here)\n\n";
+	cout<<"				3.Exit to main menu\n";
+	cout<<"____________________________________________________________________\n";
+	cout<<"Please enter your choice: ";
+	cin>>x;
+	return x;
+}
+int admsecurity()
+{
+	string name;
+	int a, b;
+	cout<<"----------------------------------------------------------------------Administrative Login-in page--------------------------------------------------";
+	cout<<"\nPlease complete the log-in procedure to gain administrative access!\n";
+	cout<<"************************************************************************\n";
+	cout<<"\nEnter the administrative username: ";
+	cin>>name;
+	cout<<"\nEnter your access code: ";
+	cin>>a;
+	b=name.compare("Souvik007");
+	if(b==0 && a==987654)
+	{
+		return 1;
+	}
+	else
+	return 0;
+}
+void admdis()
+{	
+string c;
+int co=0;
+	ifstream r1;
+	r1.open("Users.txt");
+	while(getline(r1,c))
+	{
+		co++;
+		if(co%2!=0)
+		{
+			cout<<"Username: "<<c<<"\n";
+		}
+		else
+		{
+			cout<<"Password: "<<c<<"\n";
+		cout<<"\n-------------------End of one record----------------\n";
+	}
+	}
+	r1.close();
+}
+void admstockview()
+{
+	pc c;
+		cout<<"Product id"<<"                        "<<"product name"<<"                       "<<"Price"<<"                   "<<"quantity:\n";
+		fstream f1;
+		f1.open("main.dat",ios::in|ios::binary);
+		while(!f1.eof())
+		{
+		f1.read((char*)&c,sizeof(c));
+		c.display();
+		}
+		f1.close();	
+}
+void update()
+		{
+			pc c;
+		fstream f1("main.dat",ios::in | ios::out | ios::binary);
+		int rno;
+		long pos;
+		char check='f';
+		cout<<"\n\n Enter the Product ID you want to MODIFY :\t";
+		cin>>rno;
+		while(!f1.eof())
+		{
+		pos=f1.tellg();
+		f1.read((char*)&c,sizeof(c));
+		if(c.pid==rno)
+		{
+		c.upentry();
+		f1.seekg(pos);
+		f1.write((char*)&c,sizeof(c));
+		check='t';
+		break;
+		}
+		}
+		if(check=='f')
+		cout<<"\n\n\tRECORD NOT FOUND\n";
+		f1.seekg(0);
+		cout<<"\n Now the file contains\n\n";
+		c.display();
+		f1.close();
+		}
+void write()
+{
+	char ch;
+		pc c;
+		fstream f1;
+		c.entry();
+		f1.open("main.dat",ios::app|ios::binary);
+		cout<<"\n\n\tDO you want to save the record(y/n)\t";
+		cin>>ch;
+		if(ch=='y')
+		{
+		f1.write((char*)&c,sizeof(c));
+		}
+		f1.close();
+		}
+void del()
+		{
+			pc c3;
+		ifstream f1("main.dat",ios::binary);
+		ofstream f2("temp.dat",ios::binary);
+		int rno;
+		char check='f';
+		cout<<"\n\n Enter product ID you want to DELETE :\t";
+		cin>>rno;
+		while(f1.read((char*)&c3, sizeof(c3)))
+		{
+		if(c3.pid!=rno)
+		{
+		f2.write((char*)&c3,sizeof(c3));
+		}
+		else
+		{
+			check='t';
+		}
+		}
+		if(check=='f')
+		cout<<"\n\n\tRECORD NOT FOUND\n";
+		f1.close();
+		f2.close();
+		remove("main.dat");
+		rename("temp.dat","main.dat");
+		f1.open("main.dat",ios::in);
+		cout<<"\n\n\n Now the file contains\n\n\n";
+		while(!f1.eof())
+		{
+		f1.read((char*)&c3,sizeof(c3));
+		if(f1.eof())
+		c3.display();
+		}
+		f1.close();
+		}
+		void repair()
+{
+	cout<<"**********************************************************************The repair portal!**************************************************************\n\n\n";
+	cout<<"This section is still developing.\nWe are trying to create a portal where you can write your issues regarding your PC.\nOne of our engineer will get in touch with you as soon as possible\n";	
+}
+void Laptop()
+{
+	cout<<"************************************************************************Laptop booking menu***********************************************************\n\n\n";
+	cout<<"Stay tuned!\nWe are soon gonna sell Laptops too!\nExciting offers are expected at the begining of the sale.\n\n						Thankyou! :)\n";
+}
+void read()
+{
+	pc c;
+		cout<<"Product id"<<"                        "<<"product name"<<"                       "<<"Price"<<"                   "<<"quantity:\n";
+		fstream f1;
+		f1.open("main.dat",ios::in|ios::binary);
+		while(!f1.eof())
+		{
+		f1.read((char*)&c,sizeof(c));
+		c.display();
+		}
+		f1.close();
+}
+void PC()
+{	
+	pc c1;
+	order o1;
+		int rn, total=0, qty1;
+		int found=0;
+		char co, cf, cg, cj;
+		long pos2;
+	read();
+	
+		fstream f1("main.dat",ios::in | ios::out | ios::binary);
+		remove("order.txt");
+		ofstream f2;
+		f2.open("order.txt", ios::app);
+		f2.seekp(0);
+		reorder:
+			f1.seekg(0);
+		cout<<"\n\n Enter Product ID you want to ORDER :\t";
+		cin>>rn;
+		while(!f1.eof())
+		{
+			pos2=f1.tellg();
+		f1.read((char*)&c1,sizeof(c1));
+		if(c1.pid==rn)
+		{
+			ret:
+		cout<<"How may of this product you want?\n";
+		cin>>qty1;
+		if(qty1<c1.qty|| qty1==c1.qty)
+		{
+		f2<<"Product id: "<<c1.pid<<"	"<<"Product name: "<<c1.pname<<"	"<<"Quantity odered: "<<qty1<<"\n";
+		total=total+(c1.price*qty1);
+		c1.qty=c1.qty-qty1;
+		f1.seekg(pos2);
+		f1.write((char*)&c1,sizeof(c1));
+		cout<<"Do you want to buy more?\n";
+		cout<<"Press 'y' for Yes and 'n' for No!\n";
+		cin>>cf;
+		if(cf=='y')
+		{
+			goto reorder;	
+		}
+		else if(cf=='n')
+		{
+			f2<<"The total amount to be paid is: Rs"<<total<<"\n";
+		}
+		++found;
+		break;
+	}
+	else
+	{
+		cout<<"Sorry we don't have that much stock!\n";
+		ret1:
+		cout<<"Press 'R' to retry 'M' for main menu\n";
+		cin>>cg;
+		if(cg=='R')
+		{
+			goto ret;
+		}
+		else if(cg=='M')
+		{
+			system("CLS");
+			o1.ordermain();
+		}
+		else 
+		{
+			cout<<"Invalid entry, Try again!\n";
+			goto ret1;
+		}
+	}
+		}
+		}
+			f2.close();
+		f1.close();
+		if(found==0)
+	{
+		cout<<"\n\n\tProduct id NOT FOUND!!!!!!!!!!!!!\n"<<endl;
+		cout<<"Press 'R' to retry\n";
+		if(cj=='R')
+		{
+			system("CLS");
+			o1.ordermain();
+		}
+		
+	}
+	else
+	{
+		cout<<"Order placed successfully!\nMake sure to take a print out from the billing details option before you log out!\n";
+		cout<<"Press 'B' to go back: ";
+		cin>>co;
+		if(co=='B')
+		{
+			system("CLS");
+			o1.ordermain();
+		}
+	}
+	
+}
+void billdis()
+{
+	ifstream f1;
+	f1.open("order.txt");
+	string c;
+	while(getline(f1,c))
+	{
+		cout<<c<<"\n";
+	}
+}
+void cuscall()
+{
+	customer c1;
+	c1.cus();
+}
+int main()
+{	
+	int i,j,k;
+	char a;
+	administrator a1;
+	customer c1;
+	cout<<"----------------------------------------------------------------------CSE Project----------------------------------------------------------------------";
+	cout<<"\n"<<"\n";
+	cout<<"\n			  	Name-Souvik Aditya		  Section-K18QW			Roll-51\n";
+	cout<<"-------------------------------------------------------------------------------------------------------------------------------------------------------";
+	cout<<"\n\n\n\n\n                                                           #################################                                                     \n";
+	cout<<"                                                           #     ADITYA's COMPUTER SHOP    #                                                            \n";
+	cout<<"                                                           #################################                                                           \n";
+	cout<<"_______________________________________________________________________________________________________________________________________________________\n";
+	cout<<"\n|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n";
+	cout<<"_______________________________________________________________________________________________________________________________________________________\n" ;
+	cout<<"\n                                                          -----WELCOME TO OUR HOMEPAGE!-----\n";
+	cout<<"Please follow the instructions, in order to proceed:-\n";
+	cout<<"\n				1.Adminstrative Access\n\n";
+	cout<<"				2.Customer Access\n\n";
+	cout<<"				3.Exit\n";
+	cout<<"____________________________________________________________________\n"; 
+	label1:
+	cout<<"Please Enter your choice: ";
+	cin>>i; 
+	if(i==1)
+	{	label9:
+		system("CLS");
+		k=admsecurity();
+		if(k==1)
+		{
+			system("CLS");
+			a1.adm();
+		}
+		else
+		{
+			cout<<"\nLog-in credentials didn't match! please try again soon\n";
+			cout<<"Press 'M' for main menu or 'R' to retry\n";
+			cin>>a;
+			if(a=='M')
+			{
+				system("CLS");
+				main();
+			}
+			else if(a=='R');
+			{
+				system("CLS");
+				goto label9;
+			}
+		}
+	  }
+	else if(i==2)
+	{
+		system("CLS");
+		j=security();
+		if(j==2)
+		{	system("CLS");
+			c1.signup();
+		}
+		else if(j==3)
+		{
+			system("CLS");
+			main();
+		}
+		else if(j==1)
+		{
+			system("CLS");
+			c1.login();
+		}
+	}
+	else if(i==3)
+	{
+		exit;
+	}
+	else
+	{
+		cout<<"\nOops! invalid key, try again!\n";
+		goto label1;
+	}
+	  return 0;  
+}
